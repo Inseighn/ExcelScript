@@ -1,4 +1,4 @@
-ExcelFile = "output.xlsx"
+ExcelFile = "\output.xlsx"
 LinkColumn = "B"
 ItemColumn = "A"
 PriceColumn = "C"

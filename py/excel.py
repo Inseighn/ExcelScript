@@ -1,9 +1,10 @@
 import os
 from xlwings import Workbook, Range, Sheet
+from pathlib import Path
 import config
 
-cwd = os.path.dirname(os.path.realpath(__file__))
-wb = Workbook(cwd + "//" + config.ExcelFile)
+cwd = Path(__file__).parent.parent
+wb = Workbook(str(cwd) + config.ExcelFile)
 
 def sheet_count():
     return Sheet.count()
