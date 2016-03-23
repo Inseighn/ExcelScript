@@ -8,7 +8,12 @@ from requests import Session
 
 
 def testLink(link):
-    print (str(Path(__file__).parent.parent) + config.ExcelFile)
+    r = requests.get(link, proxies=config.proxies)
+    soup = BeautifulSoup(r.content)
+    spans = soup.find_all("b")
+    print (len(spans))
+    for span in spans:
+        print (span)
 
 if __name__ == "__main__":
-    testLink("http://www.pcconnection.com/product/lacie-250gb-porsche-design-slim-drive-p-9223-usb-3.0-portable-solid-state-drive/9000515/17677878")
+    testLink("http://www.provantage.com/nec-display-solutions-np-m282x~7NECJ044.htm")
