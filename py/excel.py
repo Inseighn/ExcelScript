@@ -20,6 +20,7 @@ def get_all_links(sheet):
 
 def set_cell_value(sheet, cell, value):
     currentCell = Range(Sheet(sheet), cell)
+    print('Setting Cell:' + cell + 'in sheet ' + Sheet(sheet).name + '->' + str(value))
     if currentCell:
         currentCell.value = value
 def get_sheet_name(index):

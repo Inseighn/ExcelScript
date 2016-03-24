@@ -17,6 +17,8 @@ def get_price(link, name):
         return get_insight_price(link)
     elif name.lower() == "zones":
         return get_zones_price(link)
+    elif name.lower() == "provantage":
+        return get_prov_price(link)
     else:
         return "123"
 
@@ -88,7 +90,10 @@ def get_insight_price(link):
 
     res = requests.post('https://www.insight.com/insightweb/getProductInfo', json=json_data, proxies=config.proxies, headers=header)
     json_response = res.json()
-    return (json_response['webProduct']['prices'][0]['price'])
+    if(json_response):
+        return (json_response['webProduct']['prices'][0]['price'])
+    else:
+        return ''
 
 def get_zones_price(link):
     r = requests.get(link, proxies=config.proxies)
@@ -97,3 +102,14 @@ def get_zones_price(link):
     soup = BeautifulSoup(r.content)
     spans = soup.find_all('span', 'prod-price')
     return (spans[0].string)
+
+def get_prov_price(link):
+    r = requests.get('http://www.provantage.com/scripts/cart.dll/feed6b1/V' + link, proxies=config.proxies)
+    soup = BeautifulSoup(r.content)
+    index1 = r.text.find('(') + 1
+    index2 = r.text.find(')')
+    arr = r.text[index1:index2].replace('\'','').split(',')
+    if(arr):
+        return str(arr[3])
+    else:
+        return ''

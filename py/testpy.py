@@ -10,10 +10,9 @@ from requests import Session
 def testLink(link):
     r = requests.get(link, proxies=config.proxies)
     soup = BeautifulSoup(r.content)
-    spans = soup.find_all("b")
-    print (len(spans))
-    for span in spans:
-        print (span)
-
+    index1 = r.text.find('(') + 1
+    index2 = r.text.find(')')
+    arr = r.text[index1:index2].replace('\'','')
+    print (arr.split(',')[3])
 if __name__ == "__main__":
-    testLink("http://www.provantage.com/nec-display-solutions-np-m282x~7NECJ044.htm")
+    testLink("http://www.provantage.com/scripts/cart.dll/feed6b1/VNECJ044")
