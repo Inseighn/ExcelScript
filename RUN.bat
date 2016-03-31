@@ -1,1 +1,1 @@
-python py\main.py
+python src\excelcostgrabber.py proxy
